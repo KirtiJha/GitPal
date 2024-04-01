@@ -3,18 +3,8 @@ import utils
 import time
 import os
 
-# local = False
-# if local:
-#     from dotenv import load_dotenv
-
-#     load_dotenv()
-
 st.title("Chat-with-your-codebase")
 
-## Get some user inputs
-# if local:
-#     gen_ai_key = os.environ.get("GEN_AI_KEY")
-# else:
 gen_ai_key = st.text_input("Enter your IBM WatsonX API Key", "")
 if gen_ai_key:
     # os.environ["GEN_AI_KEY"] = gen_ai_key
