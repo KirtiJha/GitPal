@@ -3,6 +3,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 import git
 import os
 from queue import Queue
+from prompts import model_prompt, custom_question_prompt
 
 local = False
 if local:
@@ -25,6 +26,7 @@ from genai.schema import (
 from langchain.vectorstores.faiss import FAISS
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
+from langchain.prompts import PromptTemplate
 
 model_name = "sentence-transformers/all-MiniLM-L6-v2"
 model_kwargs = {"device": "cpu"}
@@ -101,6 +103,22 @@ class Embedder:
         vector_store = FAISS.from_documents(
             documents=chunked_documents, embedding=embeddings
         )
+
+        retriever = vector_store.as_retriever()
+        search_kwargs = {"k": 3}
+
+        retriever.search_kwargs.update(search_kwargs)
+
+        #  Create conversation chain
+        memory = ConversationBufferMemory(
+            memory_key="chat_history", return_messages=True
+        )
+
+        prompt_template = model_prompt()
+        qa_chain_prompt = PromptTemplate(
+            input_variables=["context", "question"], template=prompt_template
+        )
+        question_prompt = PromptTemplate.from_template(custom_question_prompt())
         #  Create conversation chain
         memory = ConversationBufferMemory(
             memory_key="chat_history", return_messages=True
@@ -119,7 +137,7 @@ class Embedder:
                 max_new_tokens=4090,
                 min_new_tokens=10,
                 temperature=0.5,
-                top_k=50,
+                top_k=3,
                 top_p=1,
                 return_options=TextGenerationReturnOptions(
                     input_text=False, input_tokens=True
@@ -133,7 +151,13 @@ class Embedder:
         )
 
         conversation_chain = ConversationalRetrievalChain.from_llm(
-            llm=llm, retriever=vector_store.as_retriever(), memory=memory
+            llm=llm,
+            retriever=retriever,
+            memory=memory,
+            chain_type="stuff",
+            combine_docs_chain_kwargs={"prompt": qa_chain_prompt},
+            condense_question_prompt=question_prompt,
+            verbose=True,
         )
         self.delete_directory(self.clone_path)
         return conversation_chain
