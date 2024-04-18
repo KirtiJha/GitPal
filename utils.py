@@ -130,15 +130,15 @@ class Embedder:
         client = Client(credentials=credentials)
 
         llm = LangChainChatInterface(
-            model_id="meta-llama/llama-2-70b-chat",
+            model_id="mistralai/mistral-7b-instruct-v0-2",
             client=client,
             parameters=TextGenerationParameters(
-                decoding_method=DecodingMethod.SAMPLE,
-                max_new_tokens=4090,
+                decoding_method=DecodingMethod.GREEDY,
+                max_new_tokens=8000,
                 min_new_tokens=10,
-                temperature=0.5,
-                top_k=3,
-                top_p=1,
+                temperature=0.2,
+                top_k=40,
+                top_p=0.9,
                 return_options=TextGenerationReturnOptions(
                     input_text=False, input_tokens=True
                 ),

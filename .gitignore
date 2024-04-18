@@ -176,3 +176,4 @@ ask-git/share/jupyter/nbextensions/pydeck/index.js
 ask-git/share/jupyter/nbextensions/pydeck/index.js.map
 ask-git/include/site/python3.10/greenlet/greenlet.h
 ask-git/etc/jupyter/nbconfig/notebook.d/pydeck.json
+.sfdx

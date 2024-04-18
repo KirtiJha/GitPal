@@ -1,41 +1,68 @@
-## Chat with Github Repository using IBM WatsonX, Langchain, FAISS and Streamlit (RAG)
+<div align="left">
+  <img src="images/gitpal.png" alt="GitPal Logo" width="200">
+</div>
 
-Chat with any public github repository using IBM WatsonX, Langchain, FAISS vector database and Streamlit for user friendly chat interface. This is an RAG (Retrieval Augmentented Generation) application.
+## GitPal: Chat with Github Repository using IBM WatsonX, Langchain, FAISS and Streamlit (RAG)
 
-### Features
+This project facilitates conversational interaction with any public GitHub repository utilizing advanced technologies such as IBM WatsonX, Langchain, FAISS vector database, and Streamlit. It operates as an RAG (Retrieval Augmented Generation) application, enhancing the user experience with efficient code exploration and understanding.
 
-Users have to enter their IBM WatsonX API Key and GitHub Repository link. The repository is then cloned in your local and chunked. Then it is converted to embeddings using Langchain and stored in FAISS vector database. Langchain is then used to build a QA retriever so that users can chat with their code.
+## Features
 
-To use this chatbot, follow these steps:
+- **IBM WatsonX Integration**: Users input their IBM WatsonX API Key along with the GitHub Repository link.
+- **Repository Cloning and Chunking:** The specified repository is cloned locally and segmented into manageable chunks for processing.
+- **Embedding Conversion:** Utilizing Langchain, the code segments are transformed into embeddings.
+- **FAISS Vector Database:** The embeddings are stored in a FAISS vector database for efficient retrieval and querying.
+- **QA Retriever:** Langchain constructs a QA retriever, enabling users to engage in conversational queries related to their code.
+
+## GitPal User Interface
+
+<div align="center">
+  <img src="images/gitpal_ui.png" alt="Ask-DOC UI">
+</div>
+
+## Getting Started
 
 1. Clone the repository:
 
-`git clone https://github.com/KirtiJha/chat-with-github-repo.git`
+```
+git clone https://github.ibm.com/kirtijha/GitPal.git
+cd <your_project_directory>
+```
 
-2. Install the required dependencies:
+2. Create a new virtual environment using a tool like virtualenv or conda, and activate the environment:
 
-`pip install -r requirements.txt`
+```
+python3 -m venv <name_of_virtual_env>
+source /venv/bin/activate
+```
 
-3. Set your environment variables in the `.env` file
+3. Install dependencies:
 
-- Get your IBM WatsonX API Key and add it here
+```
+pip install -r requirements.txt
+```
 
 3. Run the Streamlit app:
 
-`streamlit run chatbot.py`
+```
+streamlit run chatbot.py
+```
 
-Access the chat interface by opening your web browser and navigating to http://localhost:8501.
+5. Access the chat interface:
 
-Enter your IBM WatsonX API key and the name of your GitHub repository in the provided input fields.
+Open your web browser and navigate to http://localhost:8501.
 
-Ask questions or provide instructions using natural language, and the chatbot will respond accordingly.
+- Input your IBM WatsonX API key and the name of your GitHub repository.
+- Engage with the chatbot by asking questions or providing instructions using natural language.
 
 ### Limitations
 
-- The codebase chatbot relies on the Language Model and its capabilities.
-- Large codebases or repositories with complex structures may take longer to chunk and embed.
-- The accuracy and quality of responses depend on the accuracy of the language model and the code embeddings.
+- Language Model Dependency: The chatbot's performance is contingent upon the accuracy and capabilities of the underlying language model.
+- Processing Time: Large codebases or repositories with intricate structures may incur longer processing times for chunking and embedding.
+- Response Quality: The accuracy and quality of responses are influenced by both the language model's accuracy and the effectiveness of code embeddings.
 
 ### Run App with Streamlit Cloud
 
-[Launch App on Streamlit](https://ask-codebase.streamlit.app/)
+[Launch App on Streamlit](https://gitpal.streamlit.app/)
+
+Feel free to contribute, provide feedback, or report issues via GitHub. Your contributions are valued and help enhance the functionality and usability of this project.

@@ -3,18 +3,22 @@ from langchain.prompts import PromptTemplate
 
 def prompt_format(system_prompt, instruction):
     B_INST, E_INST = "[INST]", "[/INST]"
-    B_SYS, E_SYS = "<SYS>>\n", "\n<</SYS>>\n\n"
-    SYSTEM_PROMPT = B_SYS + system_prompt + E_SYS
+    # B_SYS, E_SYS = "<SYS>>\n", "\n<</SYS>>\n\n"
+    SYSTEM_PROMPT = system_prompt
     prompt_template = B_INST + SYSTEM_PROMPT + instruction + E_INST
     return prompt_template
 
 
 def model_prompt():
-    system_prompt = """You are a helpful assistant and an expert in coding and code analysis. You have full access to the codes, files and documentations in the vector database.
-    You will use the provided context to answer user questions. Attach relevant code from the context in your answer to properly answer user question with explaination.
-    Read the given context before answering questions and think step by step and answer question based on the provided context. Please do not repeat user question in your answer.
-    If you can not answer a user question based on the provided context, inform the user.
-    Do not use any other information for answering user."""
+    system_prompt = """You are an AI assistant, an expert in coding and code analysis. You have full access to the codes, files, and documentations in the public Github repository.
+
+You will use the provided context to answer user questions. When appropriate, attach relevant code snippets from the repository to your answers to provide a thorough explanation or to give more information.
+
+Before answering questions, carefully read the given context and think step by step. Your answers should be based on the provided context and should not repeat the user's question.
+
+If a question cannot be answered using the context, you politely inform the user that the answer is not available in the current context. You do not use any other information outside of the context to answer user questions.
+
+"""
     instruction = """
     Context: {context}
     User: {question}"""
