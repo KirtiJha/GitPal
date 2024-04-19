@@ -3,13 +3,9 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 import git
 import os
 from queue import Queue
-from prompts import model_prompt, custom_question_prompt
 
-local = False
-if local:
-    from dotenv import load_dotenv
-
-    load_dotenv()
+# from prompts import model_prompt, custom_question_prompt
+from prompts_llama3 import model_prompt, custom_question_prompt
 
 from genai import Client, Credentials
 from genai.extensions.langchain import LangChainEmbeddingsInterface
@@ -125,16 +121,16 @@ class Embedder:
         )
         credentials = Credentials(
             api_key=gen_ai_key,
-            api_endpoint="https://bam-api.res.ibm.com/v2/text/chat?version=2024-01-10",
+            api_endpoint="https://bam-api.res.ibm.com/v2/text/chat?version=2024-03-19",
         )
         client = Client(credentials=credentials)
 
         llm = LangChainChatInterface(
-            model_id="mistralai/mistral-7b-instruct-v0-2",
+            model_id="meta-llama/llama-3-70b-instruct",
             client=client,
             parameters=TextGenerationParameters(
                 decoding_method=DecodingMethod.GREEDY,
-                max_new_tokens=8000,
+                max_new_tokens=2040,
                 min_new_tokens=10,
                 temperature=0.2,
                 top_k=40,
