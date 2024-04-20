@@ -5,7 +5,7 @@ def prompt_format(system_prompt, instruction):
     B_INST, E_INST = "[INST]", "[/INST]"
     # B_SYS, E_SYS = "<SYS>>\n", "\n<</SYS>>\n\n"
     SYSTEM_PROMPT = system_prompt
-    prompt_template = B_INST + SYSTEM_PROMPT + instruction + E_INST
+    prompt_template = "<s>" + B_INST + SYSTEM_PROMPT + instruction + "</s>" + E_INST
     return prompt_template
 
 

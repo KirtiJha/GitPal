@@ -4,8 +4,9 @@ import git
 import os
 from queue import Queue
 
-# from prompts import model_prompt, custom_question_prompt
-from prompts_llama3 import model_prompt, custom_question_prompt
+from prompts import model_prompt, custom_question_prompt
+
+# from prompts_llama3 import model_prompt, custom_question_prompt
 
 from genai import Client, Credentials
 from genai.extensions.langchain import LangChainEmbeddingsInterface
@@ -126,11 +127,11 @@ class Embedder:
         client = Client(credentials=credentials)
 
         llm = LangChainChatInterface(
-            model_id="meta-llama/llama-3-70b-instruct",
+            model_id="mistralai/mixtral-8x7b-instruct-v0-1",
             client=client,
             parameters=TextGenerationParameters(
                 decoding_method=DecodingMethod.GREEDY,
-                max_new_tokens=2040,
+                max_new_tokens=16000,
                 min_new_tokens=10,
                 temperature=0.2,
                 top_k=40,
