@@ -49,7 +49,7 @@ def main():
             st.toast("Cloning your repository...")
             time.sleep(2)
 
-            ## Load the Github Repo
+            ## Load the Github Repo to extract files
             embedder = utils.Embedder(st.session_state.user_repo)
             embedder.clone_repo()
             st.session_state.embedder = embedder
