@@ -56,7 +56,7 @@ def main():
             st.toast("Your repo has been cloned")
             time.sleep(2)
 
-            ## Chunk and Create DB
+            ## Chunk and Create DB for processing
             with st.spinner("Processing your repository. This may take some time.."):
                 st.session_state.conversation_chain = (
                     st.session_state.embedder.get_conversation_chain(
