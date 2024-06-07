@@ -67,7 +67,7 @@ def main():
 
     st.markdown(""":orange[Selected Repository] - """ + st.session_state.user_repo)
 
-    # Initialize chat history for the chatbot
+    # Initialize chat history for the chatbot session
     if "messages" not in st.session_state:
         st.session_state.messages = [
             {
