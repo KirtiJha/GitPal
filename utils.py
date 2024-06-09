@@ -5,7 +5,7 @@ import os
 from queue import Queue
 
 # from prompts import model_prompt, custom_question_prompt
-# no using custom system prompt
+# no using custom system prompt. I will use default system prompt
 from prompts_llama3 import model_prompt, custom_question_prompt
 
 from genai import Client, Credentials
